@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="css/all.min.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/signup.css">
     <link rel="shortcut icon" type="image/png" href="Assets/solar-panels_4114975.png">
     <title>Registration</title>
 </head>
@@ -26,6 +27,7 @@
             </div>
             <!--------------- right box --------------->
             <div class="col-md-6 right-box">
+                <div id="imageTest"> </div>
                 <div class="row align-items-center">
                     <div class="header-text mb-4">
                         <p class="fs-3">Registrate here</p>
@@ -43,16 +45,19 @@
                         <input type="text" class="form-control form-control-lg bg-light form fs-6"
                             placeholder="Email address" id="userMailInput">
                     </div>
+                    <!--------------- phone  number input--------------->
                     <div class="input-group mb-3">
                         <input type="tel" class="form-control form-control-lg bg-light form fs-6 me-1" placeholder="Phone Number"
                             id="userPhone">
-                        <input type="date" class="form-control form-control-lg bg-light form fs-6 ms-1" placeholder="Enter Birth date"
-                            id="userBirthDate">
                     </div>
-                    <div class="input-group mb-3">
-                        <input type="number" class="form-control form-control-lg bg-light form fs-6" placeholder="National ID"
-                            id="userNatId">
-                    </div>
+                    <!------------------------ BirthDate ------------------------->
+                    <!-- <div class="p-3">
+                        <label class="px-1">Birth Date :</label>
+                        <select name="day" id="day"></select>
+                        <select name="month" id="month"></select>
+                        <select name="year" id="year"></select>
+                        <button class="btn bg-danger" onclick="checkUserAge()">check</button>
+                    </div> -->
                     <!-- <div class="input-group mb-3">
                         <input type="date" class="form-control form-control-lg bg-light form fs-6 w-50" placeholder="Enter Birth date" id="userBirthDate">
                     </div> -->
@@ -66,7 +71,11 @@
                         <input type="password" class="form-control form-control-lg bg-light form fs-6" placeholder="Confirm Password"
                             id="userRePassInput">
                     </div>
-                    <a href="index.html" class="mb-3"><small>Login?</small></a>
+                    <!-- --------------- National ID image ------------->
+                        <small class="fw-bold mb-2">National ID image :</small>
+                            <input class=" " type="file" id="userNIdInput" accept="image/jpg, image/png">
+                    <a href="index.html" class="my-3"><small>Login?</small></a>
+                    
                 </div>
                 <div>
                     <button class="btn btn-primary w-100 mb-2" id="signUpBtn" onclick="signUp()">Sign up</button>
@@ -81,9 +90,10 @@
 
 
 
-
-    <script src="js/bootstrap.min.js"></script>
+    
+    
     <script src="js/jquery-3.5.1.slim.min.js" ></script>
+    <script src="js/bootstrap.min.js"></script>
     <script src="js/popper.min.js" ></script>
     <script src="js/intlTelInput.min.js"></script>
     <script src="js/login.js"></script>

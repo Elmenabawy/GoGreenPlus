@@ -2,8 +2,8 @@
 
 
 /*--------------login--------------*/
-let loginMailInput = document.getElementById("loginMailInput");
-let loginPassInput = document.getElementById("loginPassInput");
+const loginMailInput = document.getElementById("loginMailInput");
+const loginPassInput = document.getElementById("loginPassInput");
 let signInUserMailErr = document.getElementById("signInUserMailErr");
 let signInUserPassErr = document.getElementById("signInUserPassErr");
 let fromCheck = document.getElementById("FormChecker");
@@ -12,20 +12,23 @@ let signInBtn = document.getElementById("signInBtn");
 
 
 /*--------------sign up--------------*/
-let userNameInput = document.getElementById("userNameInput");
-let userMailInput = document.getElementById("userMailInput");
-let userPassInput = document.getElementById("userPassInput");
-let userConfPassInput = document.getElementById("userRePassInput");
+const userNameInput = document.getElementById("userNameInput");
+const userMailInput = document.getElementById("userMailInput");
+const userPassInput = document.getElementById("userPassInput");
+const userConfPassInput = document.getElementById("userRePassInput");
 let signUpBtn = document.getElementById("signUpBtn");
 let signUpUserNameErr = document.getElementById("signUpUserNameErr");
 let signUpMailErr = document.getElementById("signUpMailErrMsg");
 let ExistsignUpMailErr = document.getElementById("ExistsignUpMailErrMsg");
 let signUpPassErr = document.getElementById("signUpPassErrMsg");
 let confPswrdErr = document.getElementById("confPswrdErrMsg");
-let userPhone = document.getElementById("userPhone");
-let googleSignInBtn = document.getElementById("googleSignInBtn");
+const userPhone = document.getElementById("userPhone");
+const userNIdInput = document.getElementById("userNIdInput")
 var userInfo;
-
+const yearSelect = document.getElementById('year');
+const monthSelect = document.getElementById('month');
+const daySelect = document.getElementById('day');
+const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 /*-------------- Main --------------*/
 
 
@@ -47,9 +50,11 @@ function login() {
         loginPassInput.classList.add("is-invalid");
         signInUserPassErr.classList.replace("d-none", "d-block");
         return false; // Add this line to indicate login failure
-    } else {
+    } 
+    
+    else {
         for (let i = 0; i < userInfo.length; i++) {
-            if (userInfo[i].email.toLowerCase() === loginMailInput.value.toLowerCase() && userInfo[i].password === loginPassInput.value) {
+            if (userInfo[i].email.toLowerCase() === loginMailInput.value.toLowerCase() && userInfo[i].password === loginPassInput.value ) {
                 // Remove unnecessary class manipulations
                 loginMailInput.classList.remove("is-invalid");
                 loginMailInput.classList.add("is-valid");
@@ -57,6 +62,9 @@ function login() {
                 loginPassInput.classList.add("is-valid");
                 window.open('../home.html');
                 return true;
+            }
+            else{
+                console.log("Dosn`t Exist");
             }
         }
 
@@ -72,8 +80,6 @@ function login() {
 
 /*----------- Registration section -----------*/
 
-() => { window.intlTelInput(userPhone , {}); };
-
 
 function signUp() {
     if (!isExist() && userInputsValidation()) {
@@ -81,13 +87,17 @@ function signUp() {
             name: userNameInput.value,
             email: userMailInput.value,
             password: userPassInput.value,
+            userPhone: userPhone.value,
+            // userBirthDate: userBirthDate.value,
+            // userNID : userNID.value,
         };
         userInfo.push(user);
         localStorage.setItem("users", JSON.stringify(userInfo));
         console.log(userInfo);
-        window.open("../index.html",target);
-    } else {
-        console.log("Registration failed");
+        window.open("../index.html");
+    }
+    else {
+        window.alert("Please check your inputs again");
     }
 }
 
@@ -96,8 +106,7 @@ function signUp() {
 function isExist() {
     for (let i = 0; i < userInfo.length; i++) {
         if (
-            userInfo[i].email.toLowerCase() === userMailInput.value.toLowerCase() &&
-            userInfo[i].name.toLowerCase() === userNameInput.value.toLowerCase()
+            userInfo[i].email.toLowerCase() === userMailInput.value.toLowerCase()
         ) {
             userMailInput.classList.remove("is-valid");
             userMailInput.classList.add("is-invalid");
@@ -111,6 +120,91 @@ function isExist() {
     ExistsignUpMailErr.classList.replace("d-block", "d-none");
     return false;
 }
+// -------------------Birth Date ---------------
+
+
+
+// (function populateMonths() {
+//     for (let i = 0; i < months.length; i++) {
+//         const option = document.createElement('option');
+//         option.textContent = months[i];
+//         monthSelect.appendChild(option);
+//     }
+//     monthSelect.value = "January";
+// })();
+
+// let previousDay;
+
+// function populateDays(month) {
+//     // Delete all of the children of the day dropdown if they do exist
+//     while (daySelect.firstChild) {
+//         daySelect.removeChild(daySelect.firstChild);
+//     }
+
+//     // Holds the number of days in the month
+//     let dayNum;
+
+//     // Get the current year
+//     let year = yearSelect.value;
+
+//     if (month === 'January' || month === 'March' ||
+//         month === 'May' || month === 'July' || month === 'August'
+//         || month === 'October' || month === 'December') {
+//         dayNum = 31;
+//     } else if (month === 'April' || month === 'June'
+//         || month === 'September' || month === 'November') {
+//         dayNum = 30;
+//     } else {
+//         // Check for a leap year
+//         if (new Date(year, 1, 29).getMonth() === 1) {
+//             dayNum = 29;
+//         } else {
+//             dayNum = 28;
+//         }
+//     }
+
+//     // Insert the correct days into the day <select>
+//     for (let i = 1; i <= dayNum; i++) {
+//         const option = document.createElement("option");
+//         option.textContent = i;
+//         daySelect.appendChild(option);
+//     }
+
+//     // Set the daySelect value to the previous day, if available
+//     if (previousDay) {
+//         daySelect.value = previousDay;
+//     }
+// }
+
+// function populateYears() {
+//     // Get the current year as a number
+//     let year = new Date().getFullYear();
+
+//     // Make the previous 100 years be an option
+//     for (let i = 0; i < 101; i++) {
+//         const option = document.createElement("option");
+//         option.textContent = year - i;
+//         yearSelect.appendChild(option);
+//     }
+// }
+
+// populateDays(monthSelect.value);
+// populateYears();
+
+// yearSelect.onchange = function () {
+//     populateDays(monthSelect.value);
+// };
+
+// monthSelect.onchange = function () {
+//     populateDays(monthSelect.value);
+// };
+
+// daySelect.onchange = function () {
+//     previousDay = daySelect.value;
+// };
+
+
+
 
 
 //----------------------------validation---------------------------- 
@@ -149,11 +243,63 @@ function userEmailAlert(){
         return false;
     }
 }
-/*------------Phone Number------------*/
-function phoneNumber(){
-    window.intlTelInput(input, {});
+//-----------Phone Number------------
+function PhoneNumberValidation(phoneNumber) {
+    // Regex for an Egyptian phone number with country code (e.g., +20) and 11 digits
+    const regex = /^01\d{9}$/;
+
+    // Test the input against the regex
+    if (regex.test(phoneNumber)) {
+        return true;  // Valid phone number
+    } else {
+        return false; // Invalid phone number
+    }
 }
 
+
+//----------- Birthdate Validation------------
+// function isAbove18(daySelect, monthSelect, yearSelect) {
+//     // Assuming date components are provided as strings
+//     const day = parseInt(daySelect, 10);
+//     const month = parseInt(monthSelect, 10);
+//     const year = parseInt(yearSelect, 10);
+
+//     // Calculate the current date
+//     const currentDate = new Date();
+//     const currentYear = currentDate.getFullYear();
+//     const currentMonth = currentDate.getMonth() + 1; // Months are zero-based
+//     const currentDay = currentDate.getDate();
+
+//     // Calculate the minimum birthdate for 18 years old
+//     const minBirthYear = currentYear - 18;
+//     const minBirthMonth = currentMonth;
+//     const minBirthDay = currentDay;
+
+//     // Construct a regex pattern for validation
+//     const regexPattern = new RegExp(
+//         `^${minBirthYear}${minBirthMonth < 10 ? '0' : ''}${minBirthMonth}${minBirthDay < 10 ? '0' : ''}${minBirthDay}$`
+//     );
+
+//     // Validate against the regex pattern
+//     return regexPattern.test(`${year}${month < 10 ? '0' : ''}${month}${day < 10 ? '0' : ''}${day}`);
+// }
+
+//----------------------National Id image--------------------
+var uploadedImage = '';
+
+userNIdInput.addEventListener('change', () => {
+    const reader = new FileReader();
+
+    reader.addEventListener('load', () => {
+        uploadedImage = reader.result;
+        document.querySelector('#imageTest').style.backgroundImage = `url(${uploadedImage})`;
+    });
+
+    reader.readAsDataURL(userNIdInput.files[0]);
+    console.log(reader.readAsDataURL(userNIdInput.files[0]))
+});
+
+//-----------------Password-----------------
 function userPasswordValidation() {
     //password at least has one digit,one upper or lowercase letter between 8 and 40char length
     let regex = /^.{5,15}$/;
@@ -185,13 +331,16 @@ function samePasswordCheck(){
         return false;
     }
 }
-
+// ------------------ Validate form inputs----------------
 function userInputsValidation(){
+
     usernameValidation();
     userEmailAlert();
     userPasswordValidation();
     samePasswordCheck();
-    if(usernameValidation() == true && userEmailAlert() == true && userPasswordValidation() == true && userPasswordValidation() == true && samePasswordCheck() == true){
+    PhoneNumberValidation();
+
+    if (usernameValidation() == true && userEmailAlert() == true && userPasswordValidation() == true && userPasswordValidation() == true && samePasswordCheck() == true && PhoneNumberValidation () == true ){
         return true;
     }
     else{
