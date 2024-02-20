@@ -23,7 +23,8 @@ let ExistsignUpMailErr = document.getElementById("ExistsignUpMailErrMsg");
 let signUpPassErr = document.getElementById("signUpPassErrMsg");
 let confPswrdErr = document.getElementById("confPswrdErrMsg");
 const userPhone = document.getElementById("userPhone");
-const userNIdInput = document.getElementById("userNIdInput")
+const userNIdInput = document.getElementById("userNIdInput");
+
 var userInfo;
 const yearSelect = document.getElementById('year');
 const monthSelect = document.getElementById('month');
@@ -285,19 +286,7 @@ function PhoneNumberValidation(phoneNumber) {
 // }
 
 //----------------------National Id image--------------------
-var uploadedImage = '';
 
-userNIdInput.addEventListener('change', () => {
-    const reader = new FileReader();
-
-    reader.addEventListener('load', () => {
-        uploadedImage = reader.result;
-        document.querySelector('#imageTest').style.backgroundImage = `url(${uploadedImage})`;
-    });
-
-    reader.readAsDataURL(userNIdInput.files[0]);
-    console.log(reader.readAsDataURL(userNIdInput.files[0]))
-});
 
 //-----------------Password-----------------
 function userPasswordValidation() {
@@ -340,10 +329,39 @@ function userInputsValidation(){
     samePasswordCheck();
     PhoneNumberValidation();
 
-    if (usernameValidation() == true && userEmailAlert() == true && userPasswordValidation() == true && userPasswordValidation() == true && samePasswordCheck() == true && PhoneNumberValidation () == true ){
+    if (usernameValidation() == true && userEmailAlert() == true && userPasswordValidation() == true && userPasswordValidation() == true && samePasswordCheck() == true ){
         return true;
     }
     else{
         return false;
+    }
+}
+
+
+
+
+function displayImage(event) {
+    const userNIdImg = document.getElementById('userNIdImg');
+    const displayedImage = document.getElementById('displayedImage');
+
+    if (userNIdImg.files.length > 0) {
+        const file = userNIdImg.files[0];
+        const imageType = /image.*/;
+
+        if (file.type.match(imageType)) {
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+                displayedImage.src = e.target.result;
+                displayedImage.classList.remove("d-none");
+                displayedImage.classList.remove("d-block");
+            };
+
+            reader.readAsDataURL(file);
+        } else {
+            alert('Invalid image file. Please upload a valid image file.');
+        }
+    } else {
+        displayedImage.src = '';
     }
 }

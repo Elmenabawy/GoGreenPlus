@@ -50,17 +50,6 @@
                         <input type="tel" class="form-control form-control-lg bg-light form fs-6 me-1" placeholder="Phone Number"
                             id="userPhone">
                     </div>
-                    <!------------------------ BirthDate ------------------------->
-                    <!-- <div class="p-3">
-                        <label class="px-1">Birth Date :</label>
-                        <select name="day" id="day"></select>
-                        <select name="month" id="month"></select>
-                        <select name="year" id="year"></select>
-                        <button class="btn bg-danger" onclick="checkUserAge()">check</button>
-                    </div> -->
-                    <!-- <div class="input-group mb-3">
-                        <input type="date" class="form-control form-control-lg bg-light form fs-6 w-50" placeholder="Enter Birth date" id="userBirthDate">
-                    </div> -->
                     <small class="pass-err-msg text-danger mb-1 d-none"id="signUpPassErrMsg">you must strenth your password (8-40) characters*</small>
                     <div class="input-group mb-3">
                         <input type="password" class="form-control form-control-lg bg-light form fs-6"
@@ -71,9 +60,19 @@
                         <input type="password" class="form-control form-control-lg bg-light form fs-6" placeholder="Confirm Password"
                             id="userRePassInput">
                     </div>
-                    <!-- --------------- National ID image ------------->
-                        <small class="fw-bold mb-2">National ID image :</small>
-                            <input class=" " type="file" id="userNIdInput" accept="image/jpg, image/png">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control form-control-lg bg-light form fs-6" placeholder="Address"
+                            id="userAddressInput">
+                    </div>                  <!-- --------------- National ID image ------------->
+                            <!-- <div class="input-group mb-3">
+                                <input type="text" class="form-control form-control-lg bg-light form fs-6" placeholder="National id [14 digits]"
+                                    id="userNIdInput">
+                            </div> -->
+                            <div>
+                                <small class="fw-bold mb-2">National ID image :</small>
+                                <input type="file" id="userNIdImg" accept="image/*" onchange="displayImage(event)" />
+                                <img class="d-none" id="displayedImage" alt="Uploaded Image" />
+                            </div>
                     <a href="index.html" class="my-3"><small>Login?</small></a>
                     
                 </div>
